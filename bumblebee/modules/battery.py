@@ -9,6 +9,7 @@ Parameters:
 """
 
 import os
+import subprocess
 
 import bumblebee.input
 import bumblebee.output
@@ -53,6 +54,7 @@ class Module(bumblebee.engine.Module):
 
         if self._capacity < int(self.parameter("critical", 10)):
             state.append("critical")
+            subprocess.call(["/usr/bin/notify-send", "Critical battery level!"])
         elif self._capacity < int(self.parameter("warning", 20)):
             state.append("warning")
 
